@@ -22,8 +22,6 @@ import random
             - Check the market
             - Check the age
             - Check the number of employees
-            - Check the size of revenue
-            - Check standard deviation and average of previous prices
             - Check if the company has some sort of advantage over its competitors
 """
 
@@ -54,7 +52,7 @@ app = Flask(__name__)
 if __name__ == '__main__':
     app.run(
         host="127.0.0.1",
-        port=int("8083")
+        port=int("80")
      )
 
 
@@ -89,7 +87,7 @@ def get_test_calculation():
         # Otherwise standard performance chance = 8/10
         if computation_variable > 60:
             # Random number between 1 and 10 to simulate probabilities
-            number = random.randint(1,10)
+            number = random.randint(1, 10)
             # If number is a one, the trade will be a SUCCESS
             if number == 1:
                 new_revenue = create_success_revenue(company_revenue)
@@ -134,31 +132,57 @@ def get_test_calculation():
             else:
                 new_revenue = create_standard_revenue(company_revenue)
 
-        # Create revenue using probability off of the variable
+        # Create company dict and append to the return array
         calculation_data = {company['id']: str(new_revenue)}
         return_market_calculations.append(calculation_data)
 
+    # Return the array as JSON
     return jsonify(return_market_calculations)
 
 
+# Take the market data from Spring and calculate the prices changes for all companies
+@app.route("/api/flask/market/prices/update", methods=['GET'])
+def calculate_market_price_changes():
+    # Get the data from URI query parameter
+    url_encoded = request.args.get('company-data')
+    # Decode the URI string
+    url_decoded = urllib.parse.unquote(url_encoded)
+    # Convert the string into JSON
+    company_data = json.loads(url_decoded)
+
+    # This array will contain dictionaries linking a company ID to a calculated revenue
+    return_market_calculations = []
+
+    # Iterate over company data
+    for company in company_data:
+        print(company)
+
+    return jsonify('hello')
+
+
+# Calculate the computation variable by checking the company stats
 def calculate_computation_variable(company):
     company_age = company['age']
     company_employees = company['employees']
     company_market = company['marketType']
     company_advantage = company['competitiveAdvantage']
 
+    # Each variable should represent 25% of the total value
     age_percentage = check_company_age(company_age) / 25
     market_percentage = check_market(company_market) / 25
     size_percentage = check_company_size(company_employees) / 25
     advantage_percentage = check_competitive_advantage(company_advantage) / 25
 
+    # The company stats will have a weighting of 30% whereas advantage will only account for 10% of final variable
     standard_weighting = 0.3
     competitive_weighting = 0.1
 
     total = (age_percentage * standard_weighting) + (market_percentage * standard_weighting) \
-            + (size_percentage * standard_weighting) + (advantage_percentage * competitive_weighting)
+        + (size_percentage * standard_weighting) + (advantage_percentage * competitive_weighting)
 
+    # Multiply by 100 to get a number between 0-100.
     computation_variable = total * 100
+    # Cast to int to remove trailing spaces
     return int(computation_variable)
 
 
@@ -212,8 +236,8 @@ def check_competitive_advantage(company_advantage):
 # Chance of big success is 1/3, chance of small success is 1/3, chance of normal success is 1/3.
 def create_success_revenue(revenue):
     # Introduce proportion so that companies with a small starting revenue will face large increase
-    if revenue < 100000:
-        revenue = revenue * 10
+    # if revenue < 100000:
+    #     revenue = revenue * 10
     # Get a number between 1 and 300 to simulate some probabilities
     number = random.randint(1, 300)
     # If number is less than or equal to 100, the success will be big
