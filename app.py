@@ -150,14 +150,26 @@ def calculate_market_price_changes():
     # Convert the string into JSON
     company_data = json.loads(url_decoded)
 
-    # This array will contain dictionaries linking a company ID to a calculated revenue
-    return_market_calculations = []
+    # This array will contain dictionaries linking a company ID to a price change
+    return_price_calculations = []
 
     # Iterate over company data
     for company in company_data:
-        print(company)
+        # Get the company id, share price and transactions
+        company_id = company['companyId']
+        company_current_share_price = company['sharePrice']
+        transactions = company['transactions']
+        print(transactions)
+        # Calculate the price change for each company
+        # Create dictionary of company id to price change and add to array for returning
+        if not transactions:
+            return_price_calculations.append({company_id: '+/-0.0%'})
+        else:
+            price_change = calculate_price_changes(company_current_share_price, transactions)
+            return_price_calculations.append({company_id: price_change})
 
-    return jsonify('hello')
+    # Return the array as JSON
+    return jsonify(return_price_calculations)
 
 
 # Calculate the computation variable by checking the company stats
@@ -283,9 +295,37 @@ def create_fail_revenue(revenue):
         return revenue * 0.95
 
 
+# Calculate the price change according to supply and demand of trades
+def calculate_price_changes(company_share_price, transactions):
+    # Array to add all the prices this company has been traded at
+    price_array = []
+    # Go through the transactions and add the array the trade price of each transaction
+    for transaction in transactions:
+        price_array.append(transaction['price'])
+    # Get the mean of the prices
+    price_average = numpy.mean(price_array)
+    # Now calculate the percentage increase/decrease
+    new_share_price = price_average/company_share_price
+    # Now determine whether the change is positive. negative or 0.
+    if new_share_price < 1:
+        new_share_price = '-'+str(round(new_share_price, 2))+'%'
+    elif new_share_price == 0:
+        new_share_price = '+/-0.0%'
+    else:
+        new_share_price = '+'+str(round(new_share_price, 2))+'%'
+
+    return new_share_price
+
+
+
+
+
+
+
+
 """
 
-    This code is for price changes
+    This code is for future calculations using standard deviation etc
     
     # def calculate_step_2_variable():
     #     highest = max(prices)

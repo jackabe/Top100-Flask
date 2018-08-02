@@ -16,8 +16,8 @@
       <file leaf-file-name="app.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="159" column="25" selection-start-line="159" selection-start-column="25" selection-end-line="159" selection-end-column="25" />
+            <state relative-caret-position="567">
+              <caret line="323" lean-forward="true" selection-start-line="323" selection-end-line="323" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -45,7 +45,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
+  <component name="ProjectFrameBounds" fullScreen="true">
     <option name="width" value="1440" />
     <option name="height" value="900" />
   </component>
@@ -144,18 +144,19 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="6" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24665257" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.9745455" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.9745455" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.45818183" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.45818183" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -169,6 +170,16 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2340">
+          <caret line="159" column="25" selection-start-line="159" selection-start-column="25" selection-end-line="159" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="870">
@@ -201,8 +212,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="159" column="25" selection-start-line="159" selection-start-column="25" selection-end-line="159" selection-end-column="25" />
+        <state relative-caret-position="567">
+          <caret line="323" lean-forward="true" selection-start-line="323" selection-end-line="323" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
